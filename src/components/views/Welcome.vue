@@ -15,5 +15,6 @@ export default {
 <template>
     <Navbar/>
     <Hero/>
+    <br/>
     <Section/>
 </template>

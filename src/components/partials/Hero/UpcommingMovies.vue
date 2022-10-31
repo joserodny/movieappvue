@@ -1,5 +1,5 @@
 <script>
-import { Carousel3d, Slide } from 'vue3-carousel-3d'
+
 import axios from 'axios'
 
     const api_key = import.meta.env.VITE_API_KEY;
@@ -8,8 +8,7 @@ import axios from 'axios'
 
 export default {
     components: {
-        Carousel3d,
-        Slide,
+       
     },
     
     data() {
