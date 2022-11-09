@@ -5,7 +5,7 @@ export default {
 </script>
 
 <template>
-    <div className="place-content-center  dw overflow-hidden z-0 rounded-full relative p-3 lg:w-[50rem]">
+    <div className="place-content-center dw overflow-hidden z-0 rounded-full relative p-3 lg:w-[50rem]">
         <form role="form" className="relative flex z-50 bg-white rounded-full">
             <input type="text" placeholder="Search Movies"
                 className="rounded-full flex-1 px-6 py-4 text-gray-700 focus:outline-none" />

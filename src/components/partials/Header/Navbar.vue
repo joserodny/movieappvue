@@ -28,7 +28,7 @@
     <div
       class="text-white md:p-5 p-3 delay-75 duration-500 ease-in-out transform hover:scale-125 hover:-rotate-12"
     >
-      <router-link to="/movies">
+      <router-link to="/">
         <svg
           class="h-8 w-8 text-white"
           width="24"

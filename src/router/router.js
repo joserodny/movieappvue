@@ -8,7 +8,7 @@ const routes = [{
         component: Welcome,
     },
     {
-        path: '/movies',
+        path: '/movies/:id',
         name: "Movie",
         component: Movie,
     }
