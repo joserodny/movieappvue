@@ -39,15 +39,15 @@ export default {
 </script>
 <template>
     <Navbar/>
-    <div class="container sm:ml-[2.5rem] md:ml-[10rem] md:mt-[4rem] lg:ml-[10rem] lg:mt-[5rem] xl:ml-[13rem] xl:mt-[10rem]">
+    <div class="container xs:ml-[2.5rem] sm:ml-[2.5rem] md:ml-[10rem] md:mt-[4rem] lg:ml-[10rem] lg:mt-[5rem] xl:ml-[13rem] xl:mt-[1rem]">
         <MovieDetails :movie="movie" />
+    
         <div class="flex justify-center">
-        <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 mb-5">
-            <template v-if="movie.credits?.cast">
-                <CastCard  :casts="movie.credits.cast" />
-            </template>
-        </div>   
-          
+            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 mb-5">
+                <template v-if="movie.credits?.cast">
+                    <CastCard  :casts="movie.credits.cast" />
+                </template>
+            </div>   
         </div>
     </div>
 </template>

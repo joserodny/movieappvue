@@ -1,15 +1,21 @@
 <script>
+
 export default {
+    
     props: {
         movie: {
             required: true,
         }
     },
     computed: {
-      postPath() {
+        postPath() {
             return "http://image.tmdb.org/t/p/original/"
         },
-    }
+        youtubeVideo() {
+        return "https://www.youtube.com/embed/" + this.movie.videos?.results[0].key;
+        }  
+    },
+
 }
 </script>
 
@@ -276,18 +282,20 @@ a[data-tooltip][data-placement="top"]::after {
     left: 20px;
     margin-bottom: 4px;
 }
+
 </style>
 
 <template>
+    
     <div class="flex justify-center items-center movie-card">
+        
+        <div class="moviecontainer bg-gray-500 ">
 
-        <div class="moviecontainer bg-gray-500">
-
-            <a href="#"><img :src="postPath+movie.poster_path" alt="cover"
-                    class="cover w-[11rem]" /></a>
+           <img :src="postPath+movie.poster_path" alt="cover"
+                    class="cover w-[11rem]" />
 
             <div class="hero " style="background-size:cover;" :style="{backgroundImage: 'url(' + postPath+movie.backdrop_path + ' )' }">
-
+               
                 <div class="details">
 
                     <div class="title1">{{ movie.title }}<span>{{ movie.vote_average * 10}} %</span></div>
@@ -302,6 +310,12 @@ a[data-tooltip][data-placement="top"]::after {
 
             </div> <!-- end hero -->
 
+            <div class="absolute z-10 xss:ml-[-1rem] xss:mt-[-11rem] xs:ml-[-1rem] xs:mt-[-11rem] sm:ml-[-1rem] sm:mt-[-11rem] md:ml-[-1rem] md:mt-[-12rem] lg:ml-[-1rem] lg:mt-[-11rem] xl:ml-[-1rem] xl:mt-[-11rem]">
+                <a :href="youtubeVideo">
+                    <lottie-player src="https://lottie.host/176c911e-41aa-4a20-bad3-5b1c3ff1354b/GKjsojKQd3.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
+                </a>
+            </div>
+
             <div class="description">
 
                 <div class="column1">
@@ -312,10 +326,11 @@ a[data-tooltip][data-placement="top"]::after {
                 </div> <!-- end column1 -->
 
                 <div
-                    class=" sm:w-[23rem] sm:ml-[16rem] md:w-[30rem] md:ml-[16rem] lg:w-[45rem] lg:ml-[16rem] xl:w-[80rem] xl:ml-[16rem]">
+                    class="xss:ml-[10rm] xss:w-[21rem]   sm:w-[23rem] sm:ml-[16rem] md:w-[30rem] md:ml-[16rem] lg:w-[45rem] lg:ml-[16rem] xl:w-[80rem] xl:ml-[16rem]">
 
-                    <p>{{ movie.overview }} <a :href="movie.homepage">read more</a></p>
+                    <p class="">{{ movie.overview }} <a :href="movie.homepage">read more</a></p>
                 </div> <!-- end column2 -->
+               
             </div> <!-- end description -->
         </div> <!-- end container -->
     </div> <!-- end movie-card -->
