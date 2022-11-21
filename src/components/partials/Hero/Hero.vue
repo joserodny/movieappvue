@@ -1,9 +1,9 @@
 <script>
-import Searchbar from './Searchbar.vue'
+
 import UpcommingMovies from './UpcommingMovies.vue';
 export default {
     components: {
-        Searchbar,
+       
         UpcommingMovies,
     },
 }
@@ -22,9 +22,5 @@ export default {
            
         </div>
         
-        <div class="sm:mt-10 mt-10 xl:w-[70rem] lg:w-[60rem] md:w-[40rem]">
-            <Searchbar />
-        </div>
-       
     </div>
 </template>

@@ -31,9 +31,7 @@ export default {
             api_url+ "/movie/"+ movieId + "?api_key=" + api_key + "&append_to_response=credits,videos,images"
             );
             this.movie = response.data;
-        },
-
-        
+        },  
     }
 };
 </script>
