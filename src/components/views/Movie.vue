@@ -9,7 +9,6 @@ import axios from 'axios'
 export default {
     
     components: {
-        Navbar,
         MovieDetails,
         CastCard
     },
