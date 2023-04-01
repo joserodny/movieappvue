@@ -1,5 +1,5 @@
 <script>
-import Navbar from '../partials/header/Navbar.vue';
+import Navbar from '@/components/partials/header/Navbar.vue';
 import MovieDetails from '../partials/Section/MovieDetails.vue';
 import CastCard from '../partials/Section/CastCard.vue'
 import axios from 'axios'
