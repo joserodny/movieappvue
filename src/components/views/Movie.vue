@@ -1,7 +1,7 @@
 <script>
-import Navbar from '@/components/partials/header/Navbar.vue';
 import MovieDetails from '../partials/Section/MovieDetails.vue';
-import CastCard from '../partials/Section/CastCard.vue'
+import CastCard from '../partials/Section/CastCard.vue';
+import Navbar from '@/components/partials/Header/Navbar.vue';
 import axios from 'axios'
     
 export default {
