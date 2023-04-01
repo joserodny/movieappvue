@@ -5,7 +5,7 @@ import Card from './Card.vue';
 
     const api_key = import.meta.env.VITE_API_KEY;
     const api_url = import.meta.env.VITE_BASE_URL; 
-    const url = `${api_url}/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_video=true`;
+    const url = `https://api.themoviedb.org/3/discover/movie?api_key=e26978b639a2dc2e25c28cc4106a34fa&language=en-US&sort_by=popularity.desc&include_video=true`;
 
 export default {
     components: {
