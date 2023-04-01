@@ -1,4 +1,5 @@
 <script>
+import Navbar from '@/components/partials/header/Navbar.vue';
 import MovieDetails from '../partials/Section/MovieDetails.vue';
 import CastCard from '../partials/Section/CastCard.vue'
 import axios from 'axios'
@@ -9,6 +10,7 @@ import axios from 'axios'
 export default {
     
     components: {
+        Navbar,
         MovieDetails,
         CastCard
     },
@@ -47,3 +49,5 @@ export default {
         </div>
     </div>
 </template>
+
+
