@@ -3,9 +3,6 @@ import Navbar from '@/components/partials/header/Navbar.vue';
 import MovieDetails from '../partials/Section/MovieDetails.vue';
 import CastCard from '../partials/Section/CastCard.vue'
 import axios from 'axios'
-
-    const api_key = import.meta.env.VITE_API_KEY;
-    const api_url = import.meta.env.VITE_BASE_URL; 
     
 export default {
     
