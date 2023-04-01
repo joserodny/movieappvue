@@ -28,7 +28,7 @@ export default {
     methods: {
         async fetchMovieDetails(movieId) {
             const response = await axios.get(
-            api_url+ "/movie/"+ movieId + "?api_key=" + api_key + "&append_to_response=credits,videos,images"
+            "https://api.themoviedb.org/3"+ "/movie/"+ movieId + "?api_key=" + "e26978b639a2dc2e25c28cc4106a34fa" + "&append_to_response=credits,videos,images"
             );
             this.movie = response.data;
         },  
