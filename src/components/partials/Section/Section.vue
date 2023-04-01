@@ -5,7 +5,7 @@ import Card from './Card.vue';
 
     const api_key = import.meta.env.VITE_API_KEY;
     const api_url = import.meta.env.VITE_BASE_URL; 
-    const url = `${api_url}/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_video=true&page=`;
+    const url = `${api_url}/discover/movie?api_key=${api_key}&language=en-US&sort_by=popularity.desc&include_video=true`;
 
 export default {
     components: {
