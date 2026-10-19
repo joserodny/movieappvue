@@ -1,4 +1,5 @@
 <script>
+import { imageUrl } from '../../../services/tmdb';
 
 export default {
     
@@ -8,11 +9,10 @@ export default {
         }
     },
     computed: {
-        postPath() {
-            return "http://image.tmdb.org/t/p/original/"
-        },
+        postPath() { return imageUrl; },
         youtubeVideo() {
-        return "https://www.youtube.com/embed/" + this.movie.videos?.results[0].key;
+        const video = this.movie.videos?.results?.find((item) => item.site === 'YouTube');
+        return video ? `https://www.youtube.com/embed/${video.key}` : '';
         }  
     },
 
@@ -291,10 +291,9 @@ a[data-tooltip][data-placement="top"]::after {
         
         <div class="moviecontainer bg-gray-500 ">
 
-           <img :src="postPath+movie.poster_path" alt="cover"
-                    class="cover w-[11rem]" />
+            <img :src="postPath(movie.poster_path, 'w500')" :alt="movie.title" class="cover w-[11rem] max-h-[25rem] object-cover" />
 
-            <div class="hero " style="background-size:cover;" :style="{backgroundImage: 'url(' + postPath+movie.backdrop_path + ' )' }">
+            <div class="hero " style="background-size:cover;" :style="{backgroundImage: `url(${postPath(movie.backdrop_path, 'w1280')})` }">
                
                 <div class="details">
 
@@ -311,7 +310,7 @@ a[data-tooltip][data-placement="top"]::after {
             </div> <!-- end hero -->
 
             <div class="absolute z-10 xss:ml-[-1rem] xss:mt-[-11rem] xs:ml-[-1rem] xs:mt-[-11rem] sm:ml-[-1rem] sm:mt-[-11rem] md:ml-[-1rem] md:mt-[-12rem] lg:ml-[-1rem] lg:mt-[-11rem] xl:ml-[-1rem] xl:mt-[-11rem]">
-                <a :href="youtubeVideo">
+                <a v-if="youtubeVideo" :href="youtubeVideo" target="_blank" rel="noreferrer">
                     <lottie-player src="https://lottie.host/176c911e-41aa-4a20-bad3-5b1c3ff1354b/GKjsojKQd3.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
                 </a>
             </div>
@@ -328,7 +327,7 @@ a[data-tooltip][data-placement="top"]::after {
                 <div
                     class="xss:ml-[10rm] xss:w-[21rem]   sm:w-[23rem] sm:ml-[16rem] md:w-[30rem] md:ml-[16rem] lg:w-[45rem] lg:ml-[16rem] xl:w-[80rem] xl:ml-[16rem]">
 
-                    <p class="">{{ movie.overview }} <a :href="movie.homepage">read more</a></p>
+                    <p class="">{{ movie.overview }} <a v-if="movie.homepage" :href="movie.homepage" target="_blank" rel="noreferrer">read more</a></p>
                 </div> <!-- end column2 -->
                
             </div> <!-- end description -->

@@ -8,13 +8,15 @@ export default {
         Hero,
         Section,
     },
+    data() { return { searchQuery: '' }; },
+    methods: { updateSearch(query) { this.searchQuery = query; } },
 };
 </script>
 
 
 <template>
     <Navbar/>
-    <Hero/>
+    <Hero @search="updateSearch" />
     <br/>
-    <Section/>
+    <Section :query="searchQuery" />
 </template>

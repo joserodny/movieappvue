@@ -2,7 +2,7 @@
 import MovieDetails from '../partials/Section/MovieDetails.vue';
 import CastCard from '../partials/Section/CastCard.vue';
 import Navbar from '@/components/partials/Header/Navbar.vue';
-import axios from 'axios'
+import { getMovie } from '../../services/tmdb';
     
 export default {
     
@@ -14,7 +14,7 @@ export default {
     
     data() {
         return {
-            movie: []
+            movie: {}, loading: true, error: ''
         }
     },
 
@@ -24,18 +24,20 @@ export default {
 
     methods: {
         async fetchMovieDetails(movieId) {
-            const response = await axios.get(
-            "https://api.themoviedb.org/3"+ "/movie/"+ movieId + "?api_key=" + "e26978b639a2dc2e25c28cc4106a34fa" + "&append_to_response=credits,videos,images"
-            );
-            this.movie = response.data;
+            this.loading = true;
+            try { this.movie = (await getMovie(movieId)).data; }
+            catch (error) { this.error = error.message || 'Unable to load movie details.'; }
+            finally { this.loading = false; }
         },  
     }
 };
 </script>
 <template>
     <Navbar/>
+    <p v-if="loading" class="py-20 text-center text-white">Loading movie…</p>
+    <p v-else-if="error" class="py-20 text-center text-red-300">{{ error }}</p>
     <div class="container xs:ml-[2.5rem] sm:ml-[2.5rem] md:ml-[10rem] md:mt-[4rem] lg:ml-[10rem] lg:mt-[5rem] xl:ml-[13rem] xl:mt-[1rem]">
-        <MovieDetails :movie="movie" />
+        <MovieDetails v-if="!loading && !error" :movie="movie" />
     
         <div class="flex justify-center">
             <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 mb-5">

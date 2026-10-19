@@ -1,11 +1,12 @@
 <script>
-
 import UpcommingMovies from './UpcommingMovies.vue';
 export default {
-    components: {
-       
-        UpcommingMovies,
-    },
+  components: { UpcommingMovies },
+  emits: ['search'],
+  data() { return { search: '' }; },
+  methods: {
+    submitSearch() { this.$emit('search', this.search.trim()); },
+  },
 }
 </script>
 <template>
@@ -16,11 +17,14 @@ export default {
             <h1
                 class="relative z-20 text-5xl font-extrabold leading-none text-white xl:text-6xl sm:text-center lg:text-left">
                 WHAT’S ON <span class="text-red-600">TODAY</span></h1><br />
-            <p class="relative z-20 block mt-6 text-base text-white xl:text-xl sm:text-center lg:text-left">We've
-                DISCOVER UNLIMITED MOVIES TV SHOWS, WEB SERIES ONLY ON VIDEOSPIRE
-            </p> <br />
-           
+            <p class="relative z-20 block mt-6 text-base text-white xl:text-xl sm:text-center lg:text-left">Discover unlimited movies and TV shows on Videospire.
+            </p>
+            <form class="relative z-20 mt-5 flex max-w-xl gap-2" @submit.prevent="submitSearch">
+                <input v-model="search" aria-label="Search movies" placeholder="Search movies…" class="min-w-0 flex-1 rounded bg-white/90 px-4 py-3 text-base text-gray-900 outline-none" />
+                <button type="submit" class="rounded bg-red-600 px-5 py-3 text-base font-bold text-white hover:bg-red-700">Search</button>
+            </form>
         </div>
         
+      <UpcommingMovies />
     </div>
 </template>

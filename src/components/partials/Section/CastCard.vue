@@ -8,7 +8,7 @@ export default {
     methods:{
         castProfileImage(casting) {
             if(casting.profile_path){
-                return "http://image.tmdb.org/t/p/original/" + casting.profile_path;
+                return "https://image.tmdb.org/t/p/w342/" + casting.profile_path;
             } else {
                 return "https://via.placeholder.com/340x500";
             }
