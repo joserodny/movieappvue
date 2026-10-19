@@ -6,6 +6,9 @@
         "build": "vite build",
         "preview": "vite preview"
     },
+    "engines": {
+        "node": "24.x"
+    },
     "dependencies": {
         "@lottiefiles/lottie-player": "^1.6.0",
         "axios": "^1.1.3",
