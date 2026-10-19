@@ -1,5 +1,6 @@
 <script>
 import { imageUrl } from '../../../services/tmdb';
+import { useFavorites } from '../../../composables/useFavorites';
 
 export default {
     
@@ -8,12 +9,19 @@ export default {
             required: true,
         }
     },
+    setup() { return useFavorites(); },
+    data() { return { showVideoModal: false }; },
     computed: {
         postPath() { return imageUrl; },
         youtubeVideo() {
         const video = this.movie.videos?.results?.find((item) => item.site === 'YouTube');
         return video ? `https://www.youtube.com/embed/${video.key}` : '';
-        }  
+    },
+    methods: {
+        toggleMovieFavorite() { this.toggleFavorite(this.movie); },
+        openVideo() { this.showVideoModal = true; },
+        closeVideo() { this.showVideoModal = false; },
+    }
     },
 
 }
@@ -310,10 +318,14 @@ a[data-tooltip][data-placement="top"]::after {
             </div> <!-- end hero -->
 
             <div class="absolute z-10 xss:ml-[-1rem] xss:mt-[-11rem] xs:ml-[-1rem] xs:mt-[-11rem] sm:ml-[-1rem] sm:mt-[-11rem] md:ml-[-1rem] md:mt-[-12rem] lg:ml-[-1rem] lg:mt-[-11rem] xl:ml-[-1rem] xl:mt-[-11rem]">
-                <a v-if="youtubeVideo" :href="youtubeVideo" target="_blank" rel="noreferrer">
+                <button v-if="youtubeVideo" type="button" class="rounded-full" aria-label="Play trailer" @click="openVideo">
                     <lottie-player src="https://lottie.host/176c911e-41aa-4a20-bad3-5b1c3ff1354b/GKjsojKQd3.json" background="transparent" speed="1" style="width: 300px; height: 300px;" loop autoplay></lottie-player>
-                </a>
+                </button>
             </div>
+
+            <button type="button" class="absolute right-5 top-5 z-20 rounded-full bg-black/60 px-4 py-2 text-2xl text-yellow-300 hover:bg-black/80" :aria-label="isFavorite(movie.id) ? 'Remove from favorites' : 'Add to favorites'" @click="toggleMovieFavorite">
+                {{ isFavorite(movie.id) ? '★' : '☆' }}
+            </button>
 
             <div class="description">
 
@@ -333,4 +345,13 @@ a[data-tooltip][data-placement="top"]::after {
             </div> <!-- end description -->
         </div> <!-- end container -->
     </div> <!-- end movie-card -->
+
+    <div v-if="showVideoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4" role="dialog" aria-modal="true" aria-label="Movie trailer" @click.self="closeVideo">
+        <div class="relative w-full max-w-4xl rounded-lg bg-black p-2">
+            <button type="button" class="absolute -right-2 -top-10 text-3xl text-white" aria-label="Close trailer" @click="closeVideo">×</button>
+            <div class="aspect-video">
+                <iframe class="h-full w-full" :src="youtubeVideo" title="Movie trailer" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 </template>

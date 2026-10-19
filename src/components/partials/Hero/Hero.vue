@@ -3,10 +3,20 @@ import UpcommingMovies from './UpcommingMovies.vue';
 export default {
   components: { UpcommingMovies },
   emits: ['search'],
-  data() { return { search: '' }; },
+  data() { return { search: '', searchTimer: null }; },
   methods: {
-    submitSearch() { this.$emit('search', this.search.trim()); },
+    submitSearch() {
+      clearTimeout(this.searchTimer);
+      this.$emit('search', this.search.trim());
+    },
+    liveSearch() {
+      clearTimeout(this.searchTimer);
+      this.searchTimer = setTimeout(() => {
+        this.$emit('search', this.search.trim());
+      }, 400);
+    },
   },
+  beforeUnmount() { clearTimeout(this.searchTimer); },
 }
 </script>
 <template>
@@ -20,7 +30,7 @@ export default {
             <p class="relative z-20 block mt-6 text-base text-white xl:text-xl sm:text-center lg:text-left">Discover unlimited movies and TV shows on Videospire.
             </p>
             <form class="relative z-20 mt-5 flex max-w-xl gap-2" @submit.prevent="submitSearch">
-                <input v-model="search" aria-label="Search movies" placeholder="Search movies…" class="min-w-0 flex-1 rounded bg-white/90 px-4 py-3 text-base text-gray-900 outline-none" />
+                <input v-model="search" @input="liveSearch" aria-label="Search movies" placeholder="Search movies…" class="min-w-0 flex-1 rounded bg-white/90 px-4 py-3 text-base text-gray-900 outline-none" />
                 <button type="submit" class="rounded bg-red-600 px-5 py-3 text-base font-bold text-white hover:bg-red-700">Search</button>
             </form>
         </div>
